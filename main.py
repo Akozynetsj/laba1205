@@ -1,11 +1,14 @@
-#1
-def retur(func):
-    def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
-        return result + 10
+import time
+def time_fuction(func):
+    def wrapper(*args , **kwargs):
+        start_time = time.time()
+        rezult = func(*args  , **kwargs)
+        end_time = time.time()
+        print("Час виконання функції:" , round(end_time - start_time , 2))
+        return rezult
     return wrapper
-@retur
-def my_function(x):
-    return x * 2
-result = my_function(5)
-print(result)
+@time_fuction
+def example_function(x):
+    time.sleep(3)
+    return x
+print(example_function("Hi"))
