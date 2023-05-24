@@ -1,14 +1,14 @@
-import time
-def time_fuction(func):
-    def wrapper(*args , **kwargs):
-        start_time = time.time()
-        rezult = func(*args  , **kwargs)
-        end_time = time.time()
-        print("Час виконання функції:" , round(end_time - start_time , 2))
-        return rezult
+def cache(func):
+    dict = {}
+    def wrapper(*args, **kwargs):
+        if args in dict:
+            return dict[args]
+        else:
+            res = func(*args)
+            dict[args] = res
+            return res, dict
     return wrapper
-@time_fuction
-def example_function(x):
-    time.sleep(3)
-    return x
-print(example_function("Hi"))
+@cache
+def example_function(x,y):
+    return x * y
+print(example_function(3,3))
