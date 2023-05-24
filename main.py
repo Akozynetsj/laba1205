@@ -1,14 +1,10 @@
-def cache(func):
-    dict = {}
+def log(func):
     def wrapper(*args, **kwargs):
-        if args in dict:
-            return dict[args]
-        else:
-            res = func(*args)
-            dict[args] = res
-            return res, dict
+        res = func(*args, **kwargs)
+        print(f"Функція: {func.__name__}, Аргументи: {args}, Результат: {res}")
+        return res
     return wrapper
-@cache
-def example_function(x,y):
-    return x * y
-print(example_function(3,3))
+@log
+def example_func(x, y):
+    return x + y
+print(example_func(2, 2))
